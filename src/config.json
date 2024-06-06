@@ -1,0 +1,10 @@
+{
+    "host": "localhost",
+    "isSecure": false,
+    "apiBasePath": "api",
+    "port": 5173,
+    "useCredentials": false,
+    "endpoints": {
+        "getResponse": "resp"
+    }
+}
