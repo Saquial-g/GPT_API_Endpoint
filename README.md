@@ -24,12 +24,7 @@ To install and set up this project locally, follow these steps:
     	
 	npm install
 
-3. Set up environment variables: Create a `.env` file in the root directory of your project and add the necessary environment variables. You can use the `.env.example` file as a template.
-
-    	PORT= port
-    	OPENAI_API_KEY= OpenAIChatCompletionAPIkey
-	OPENAI_MODEL= ModelToUse
-	OER_API_KEY= OpenExchangeRatesAPIkey
+3. Set up environment variables: Modify the .env file according to your local project requirements. See subsection [Environment Variables](### Environment Variables) for more details
 	
     
 ## Usage
