@@ -24,7 +24,7 @@ To install and set up this project locally, follow these steps:
     	
 	npm install
 
-3. Set up environment variables: Modify the .env file according to your local project requirements. See subsection [Environment Variables](###Environment Variables) for more details
+3. Set up environment variables: Modify the .env file according to your local project requirements. Read subsection "Environment Variables" for more details
 	
     
 ## Usage
