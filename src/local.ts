@@ -1,10 +1,8 @@
-import { json } from 'body-parser';
 import dotenv from 'dotenv';
+import { Prod, getDatabase } from './DatabaseManager';
 
 // Configure the environment variables
 dotenv.config();
-
-
 
 // Evaluate the function specified by the model and execute it if it exists.
 export async function processAIRequest(func: string){
@@ -13,8 +11,7 @@ export async function processAIRequest(func: string){
         answer = await eval(func);
     }
     catch(e){
-        console.error('Error: ', e);
-        answer = "Error: unable to help"
+        answer = "none"
     }
     
     return answer
@@ -49,7 +46,25 @@ async function convertCurrencies(val: number, orgCurr: string, targCurr: string)
 }
 
 // Search in the previosuly initialized product database for a product that fits the specified parameter
-function searchProducts(searchParameter: string) {
-    
+async function searchProducts(searchParameters: string[]) {
+    let possible:Prod[] = []
+
+    let db = await getDatabase()
+
+    searchParameters.forEach((elem) => {
+        let results = db.filter(Prod => Prod.embeddingText.toLocaleLowerCase().includes(elem))
+        if (results.length > 0){
+            possible = possible.concat(results)
+        }
+    })
+
+    possible = possible.sort(() => Math.random() - 0.5); 
+
+    try{
+        return String([JSON.stringify(possible[0]), JSON.stringify(possible[1])])
+    }
+    catch(e){
+        return "Error: no results"
+    }
 }
     

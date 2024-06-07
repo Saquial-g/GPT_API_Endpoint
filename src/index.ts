@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { v4 as uniqueID } from 'uuid';
 
-import { AiGetFunction, RespondToUser } from './AI';
+import { handleConvHistory, AiGetFunction, RespondToUser} from './AI';
 import { processAIRequest } from './local';
 
 // Configure environment variables
@@ -20,9 +21,13 @@ router.listen(port, (): void => {
 // Listen for POST requests on the specified address
 // Receives the user prompt on the body of the request and processes it
 router.post('/prompt', async (req, res) => {
-    console.log(req.body);
-    const {prompt} = req.body;
-    let result = '';
+    const {ID, prompt} = req.body;
+    let chatID = ID
+
+    if (ID === undefined) {
+        chatID = uniqueID()
+    }
+    console.log(chatID)
 
     if (!prompt) {
         return res.status(400).json({
@@ -31,13 +36,25 @@ router.post('/prompt', async (req, res) => {
         })
     }
 
-    let func = await AiGetFunction(prompt);
-    let answer = await processAIRequest(func);
-    result = await RespondToUser(prompt, func, answer)
+    try {
+        let func = await AiGetFunction(chatID, prompt);
+        let answer = await processAIRequest(func);
+        let result = await RespondToUser(chatID, prompt, func, answer)
 
-    res.json({
-        "data": result
-    })
+        handleConvHistory( chatID, prompt, result)
+
+        res.json({
+            "ID": chatID,
+            "data": result
+        })
+    } 
+    catch (e) {
+        console.error(e);
+        res.status(500).json({
+            status: false,
+            error: 'Internal server error'
+        });
+    }
 })
 
 
