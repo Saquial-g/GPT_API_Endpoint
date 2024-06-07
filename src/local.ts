@@ -38,6 +38,7 @@ async function convertCurrencies(val: number, orgCurr: string, targCurr: string)
             answer = String(convVal)
         }
     } 
+    // Normally happens when the API couldn't be reached.
     catch(e) {
         console.log(e);
         answer = "Error: Currency information couldn't be retrieved"
@@ -52,6 +53,7 @@ async function searchProducts(searchParameters: string[]) {
 
     let db = await getDatabase()
 
+    // Filter based on the keywords specified
     searchParameters.forEach((elem) => {
         let results = db.filter(Prod => Prod.embeddingText.toLocaleLowerCase().includes(elem))
         if (results.length > 0){
@@ -59,6 +61,7 @@ async function searchProducts(searchParameters: string[]) {
         }
     })
 
+    // Sort the array to get varied responses
     possible = possible.sort(() => Math.random() - 0.5); 
 
     try{

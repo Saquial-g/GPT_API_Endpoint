@@ -44,7 +44,7 @@ export async function AiGetFunction(chat: chatDTO) {
         You're a program which listens users and decides a function to use based on their name and what they would do.
         Answer by ONLY specifying one of the following functions with a string related to what the user asked as parameter:
 
-        1. searchProducts(array strings of 20 1 word singular elements of common products of the categories home or clothing or technology related to the user's inquiry without mentioning brands)
+        1. searchProducts(array strings of 20 1 word singular elements and synonyms of common products of the categories home or clothing or technology related to the user's inquiry without mentioning brands)
         2. convertCurrencies(value to convert as float, original currency in ISO4217 as String, target currency in ISO4217 as String)
 
         No more detail is needed, just the adequate function for the user's request.
@@ -113,10 +113,10 @@ async function ConnectToOpenAI(chat: chatDTO, context: string){
             model: process.env.OPENAI_MODEL || "gpt-3.5-turbo-0125",
         })
 
-        //console.log(completion.choices[0])
         answer = completion.choices[0].message.content || ""
     }
     catch(e){
+        // Catches the case where the model can't be reached
         console.error('Error: ', e);
         return "Error: connection with the model couldn't be established"
     }

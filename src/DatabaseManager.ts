@@ -17,6 +17,7 @@ export type Prod = {
     createDate: String
 };
 
+// Extracts the data from the csv file into an array.
 export async function getDatabase() {
     const fileLocation = path.resolve(__dirname, '..', 'data', 'products_list.csv');
     const headers = ['displayTitle', 'embeddingText', 'url', 'imageUrl', 'productType', 'discount', 'price', 'variants', 'createDate'];
@@ -36,10 +37,6 @@ export async function getDatabase() {
     });
 
     return db
-}
-
-export async function searchDatabase() {
-
 }
     
 
