@@ -1,7 +1,7 @@
 
  # GPT API Endpoint
 
-This project provides an API endpoint for interacting with GPT models. It uses Express.js to handle HTTP requests and responses, and integrates with OpenAI for AI-related functionalities.
+This is a technical test for an API endpoint which allows the user to chat with a supervised version of a Model which can be fed specific information from local functions according to the user's requirements.
 
 ## Table of Contents
 
