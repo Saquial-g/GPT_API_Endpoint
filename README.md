@@ -67,9 +67,19 @@ The application uses the following environment variables:
 This was made as a technical test, but feel free to contribute as you wish:
 
 1. Fork the repository.
-2. Create a new branch for your feature or bugfix: git checkout -b feature-name
-3. Make your changes and commit them: git commit -m "Description of your changes"
-4. Push your changes to your fork: git push origin feature-name
+
+2. Create a new branch for your feature or bugfix: 
+	
+	git checkout -b feature-name
+
+3. Make your changes and commit them: 
+
+	git commit -m "Description of your changes"
+
+4. Push your changes to your fork: 
+
+	git push origin feature-name
+
 5. Open a pull request on the main repository.
 
 ## License
